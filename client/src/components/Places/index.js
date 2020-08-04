@@ -17,7 +17,7 @@ function setMap(location) {
 }
 
 export default function Places() {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("san-francisco");
   return (
     <Container>
       <div style={{ display: "flex", alignContent: "center" }}>
