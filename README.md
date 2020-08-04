@@ -10,7 +10,7 @@ ever, it is important for us to know and understand who are our local
 leaders that tax us and make our laws.
 
 We hope to only to make it more clear on who is running for office in
-your city and present the clearest information possible. F
+your city and present the clearest information possible.
 
 
 ## Technologies Used
