@@ -20,6 +20,11 @@ your city and present the clearest information possible.
 
 ## Start
 
-1. Go to `client` directory and run npm start
+1. Go to `client` directory and run npm install to download dependencies
+2. Run npm start
+
+# NPM Packages Required
+- react
+- react-router-dom
 
 
