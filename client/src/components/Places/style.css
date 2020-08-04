@@ -1,0 +1,9 @@
+.selection {
+  height: 50%;
+  padding: 0.5rem;
+  margin: auto 1rem;
+}
+
+.selection option {
+  /* padding: 1rem; */
+}
