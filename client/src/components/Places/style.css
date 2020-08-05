@@ -4,6 +4,21 @@
   margin: auto 1rem;
 }
 
+.places-container {
+  display: flex;
+}
+
+.map-svg {
+  width: 60%;
+  border-right: 1px solid grey;
+}
+
+.map-info {
+  padding: 0 1rem;
+  width: 40%;
+  height: 100%;
+}
+
 .selection option {
   /* padding: 1rem; */
 }

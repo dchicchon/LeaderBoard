@@ -46,7 +46,7 @@ export default function App() {
         <div className="row">
           <div className="col footer-link">
             &copy;{new Date().getFullYear()} | LEADERBOARD, INC. |{" "}
-            <Link to="#" tyle={{ fontSize: "1rem" }} className="link-item">
+            <Link to="#" style={{ fontSize: "1rem" }} className="link-item">
               Terms of Service
             </Link>{" "}
             |{" "}
