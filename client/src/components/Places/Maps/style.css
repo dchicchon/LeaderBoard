@@ -7,4 +7,5 @@
 .prefix__st1 {
   fill: #c7c7c7;
   transition: fill 0.5s;
+  cursor: pointer;
 }

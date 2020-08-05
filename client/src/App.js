@@ -45,8 +45,14 @@ export default function App() {
       <div className="footer">
         <div className="row">
           <div className="col footer-link">
-            &copy;{new Date().getFullYear()} | LEADERBOARD, INC. | All rights
-            reserved | Terms of Service | Privacy
+            &copy;{new Date().getFullYear()} | LEADERBOARD, INC. |{" "}
+            <Link to="#" tyle={{ fontSize: "1rem" }} className="link-item">
+              Terms of Service
+            </Link>{" "}
+            |{" "}
+            <Link to="#" style={{ fontSize: "1rem" }} className="link-item">
+              Privacy
+            </Link>
           </div>
         </div>
       </div>
