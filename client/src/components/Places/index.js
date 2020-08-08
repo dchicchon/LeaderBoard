@@ -33,7 +33,7 @@ const cityData = [
           },
           {
             name: "Sherman R. D'Silva",
-            website: "www.dsilva2020.com",
+            website: "http://www.dsilva2020.com",
           },
           {
             name: "Veronica Shinzato",
@@ -45,7 +45,7 @@ const cityData = [
           },
           {
             name: "Marjan Philhour",
-            website: "www.votemarjan.com",
+            website: "http://www.votemarjan.com",
           },
           {
             name: "David Lee",
@@ -60,7 +60,6 @@ const cityData = [
       {
         name: "district-2",
         formatName: "District 2",
-        supervisor: "",
         supervisor: {
           name: "Catherine Stefani",
           website: "https://en.wikipedia.org/wiki/Catherine_Stefani",
@@ -338,11 +337,12 @@ const locations = [
 
 export default function Places() {
   const [locationName, setLocationName] = useState("san-francisco");
-  const [locationList, setLocationList] = useState(locations);
+  const [locationList, setLocationList] = useState([]);
   const [region, setRegion] = useState({});
   const [district, setDistrict] = useState(false);
 
   useEffect(() => {
+    setLocationList(locations);
     // have a loading image while getting cityData
     if (locationName) {
       for (let i = 0; i < cityData.length; i++) {
@@ -419,67 +419,65 @@ export default function Places() {
       <div className="places-container">
         <div className="map-svg">{setMap(locationName)}</div>
         <div className="map-info">
-          <div>
-            <h2 style={{ margin: 0 }}>Region</h2>
-            <div className="district-details">
-              {district ? (
-                <>
-                  <h3>{district.formatName}</h3>
-                  <p>
-                    Elected Officials:{" "}
-                    <a
-                      noopenner="false"
-                      noreferrer="false"
-                      target="__blank"
-                      href={district.supervisor.website}
-                    >
-                      {district.supervisor.name}
-                    </a>
-                  </p>
-                  <h3>Neighborhoods</h3>
-                  <p>{district.neighborhoods}</p>
-                  {district.electionYear ? (
-                    <>
-                      <h2>Candidates Running for Election</h2>
-                      <a
-                        target="__blank"
-                        noopenner="false"
-                        noreferrer="false"
-                        href={region.electionSite}
-                      >
-                        Election Site
-                      </a>
-                      <ul
-                        className="candidates-list"
-                        style={{ overflow: "scroll" }}
-                      >
-                        {district.candidates.map((candidate, index) => (
-                          <li key={index}>
-                            {candidate.website ? (
-                              <a
-                                href={candidate.website}
-                                noopenner="false"
-                                noreferrer="false"
-                                target="__blank"
-                              >
-                                {candidate.name}
-                              </a>
-                            ) : (
-                              <p style={{ margin: 0 }}>{candidate.name}</p>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </>
+          <h2 style={{ margin: 0 }}>Region</h2>
+          {district ? (
+            <>
+              <div className="district-details">
+                <h3>{district.formatName}</h3>
+                <p>
+                  Elected Officials:{" "}
+                  <a
+                    className="candidate-link"
+                    noopenner="false"
+                    noreferrer="false"
+                    target="__blank"
+                    href={district.supervisor.website}
+                  >
+                    {district.supervisor.name}
+                  </a>
+                </p>
+                <h3>Neighborhoods</h3>
+                <p>{district.neighborhoods}</p>
+              </div>
+              {district.electionYear ? (
+                <div>
+                  <h2>Candidates Running for Election</h2>
+                  <a
+                    target="__blank"
+                    noopenner="false"
+                    noreferrer="false"
+                    href={region.electionSite}
+                  >
+                    Election Site
+                  </a>
+                  <ul className="candidate-list">
+                    {district.candidates.map((candidate, index) => (
+                      <li className="candidate" key={index}>
+                        {/* <image className="candidate-image" src="" /> */}
+                        {candidate.website ? (
+                          <a
+                            className="candidate-link"
+                            href={candidate.website}
+                            noopenner="false"
+                            noreferrer="false"
+                            target="__blank"
+                          >
+                            {candidate.name}
+                          </a>
+                        ) : (
+                          <p style={{ margin: 0 }}>{candidate.name}</p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ) : (
-                <p>None Selected</p>
+                ""
               )}
-            </div>
-          </div>
+            </>
+          ) : (
+            <p>None Selected</p>
+          )}
         </div>
       </div>
     </Container>
