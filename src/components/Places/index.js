@@ -38,7 +38,6 @@ export default function Places() {
       setloadingRegion(true);
       API.getLeaders(locationName)
         .then((res) => {
-          console.log(res.data);
           setLeaders(res.data);
           setDistrict(false);
           setloadingRegion(false);
@@ -141,18 +140,24 @@ export default function Places() {
                 <h2>{district}</h2>
                 <>
                   <h2>Elected Officials</h2>
-                  {districtLeaders.length > 0
-                    ? districtLeaders.map((elected, index) => (
+                  {districtLeaders.length > 0 ? (
+                    <div className="leader-list">
+                      {districtLeaders.map((elected, index) => (
                         <Pill key={index} leader={elected} />
-                      ))
-                    : "No Elected"}
+                      ))}
+                    </div>
+                  ) : (
+                    "No Elected"
+                  )}
                 </>
                 {districtCandidates.length > 0 ? (
                   <>
                     <h2>Candidates</h2>
-                    {districtCandidates.map((candidate, index) => (
-                      <Pill key={index} leader={candidate} />
-                    ))}
+                    <div className="leader-list">
+                      {districtCandidates.map((candidate, index) => (
+                        <Pill key={index} leader={candidate} />
+                      ))}
+                    </div>
                   </>
                 ) : (
                   <div>

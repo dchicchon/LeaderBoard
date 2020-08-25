@@ -18,35 +18,14 @@
   width: 40%;
   max-height: 100%;
 }
-.district-details {
-  /* height: 40%; */
-}
 
 /* add inner padding later on? */
-.candidate-list {
+.leader-list {
   overflow: auto;
   list-style-type: none;
   padding: 0.5rem;
-  border: 1px solid black;
+  max-height: 15rem;
+  /* border: 1px solid black; */
   border-radius: 20px;
   /* box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; */
-}
-
-.candidate {
-  /* border: 1px solid black; */
-  padding: 0.5rem;
-  font-weight: 500;
-  transition: background-color 0.25s;
-}
-
-
-
-.candidate:hover {
-  background-color: rgba(red, green, blue, alpha);
-}
-
-
-
-.selection option {
-  /* padding: 1rem; */
 }
