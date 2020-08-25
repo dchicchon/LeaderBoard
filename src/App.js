@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 // Components
@@ -11,6 +11,13 @@ import About from "./components/About";
 import "./App.css";
 
 export default function App() {
+  const [search, setSearch] = useState("");
+
+  // Function for looking up specific leader in database
+  function searchLeader() {
+    console.log(search);
+  }
+
   return (
     <Router>
       <ul className="nav">
@@ -29,6 +36,16 @@ export default function App() {
           <Link className="link-item" to="/places">
             Places
           </Link>
+        </li>
+        <li>
+          <input
+            type="text"
+            name="search"
+            className="leaderSearch"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button>Search</button>
         </li>
       </ul>
       <Switch>

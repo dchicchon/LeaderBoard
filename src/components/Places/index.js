@@ -3,6 +3,7 @@ import API from "../../utils/api";
 
 // Common Component
 import Container from "../Common/Container";
+import Pill from "../Common/Pill";
 
 // Maps
 import { SanFrancisco, NewYork } from "./Maps";
@@ -20,12 +21,14 @@ export default function Places() {
   const [locationName, setLocationName] = useState("san-francisco");
   const [locationList, setLocationList] = useState([]);
   const [leaders, setLeaders] = useState([]);
-  // const [region, setRegion] = useState({});
+  const [districtLeaders, setDistrictLeaders] = useState([]);
+  const [districtCandidates, setDistrictCandidates] = useState([]);
   const [loadingRegion, setloadingRegion] = useState(false);
   const [district, setDistrict] = useState(false);
+  // const [region, setRegion] = useState({});
 
   useEffect(() => {
-    document.title = "Location";
+    document.title = "Places";
     setLocationList(locations);
   }, []);
 
@@ -35,6 +38,7 @@ export default function Places() {
       setloadingRegion(true);
       API.getLeaders(locationName)
         .then((res) => {
+          console.log(res.data);
           setLeaders(res.data);
           setDistrict(false);
           setloadingRegion(false);
@@ -58,9 +62,30 @@ export default function Places() {
   }
 
   function select(e) {
-    for (let j = 0; j < leaders.length; j++) {
-      if (leaders[j].district === e.currentTarget.id) {
-        setDistrict(leaders[j]);
+    if (e.currentTarget.id !== district) {
+      setDistrict(e.currentTarget.id);
+      setDistrictCandidates([]);
+      setDistrictLeaders([]);
+
+      for (let j = 0; j < leaders.length; j++) {
+        // Set Leaders
+        if (
+          leaders[j].district === e.currentTarget.id &&
+          leaders[j].elected === true
+        ) {
+          // Later on we want to append for each leader of that district
+          setDistrictLeaders([leaders[j]]);
+        }
+        // Set Candidates
+        if (
+          leaders[j].district === e.currentTarget.id &&
+          leaders[j].elected === false
+        ) {
+          // Later on we want to append for each leader of that district
+          let currentList = districtCandidates;
+          currentList.push(leaders[j]);
+          setDistrictCandidates(currentList);
+        }
       }
     }
   }
@@ -104,63 +129,37 @@ export default function Places() {
         </select>
       </div>
       <div className="places-container">
+        {/* Map */}
         <div className="map-svg">{setMap(locationName)}</div>
+
+        {/* Details */}
         <div className="map-info">
           <h2 style={{ margin: 0 }}>Region</h2>
           {district ? (
             <>
               <div className="district-details">
-                <h3>{leaders.district}</h3>
-                <p>
-                  Elected Officials:{" "}
-                  <a
-                    className="candidate-link"
-                    noopenner="false"
-                    noreferrer="false"
-                    target="__blank"
-                    href={leaders.website}
-                  >
-                    {leaders.name}
-                  </a>
-                </p>
-                <h3>Neighborhoods</h3>
-                {/* <p>{district.neighborhoods}</p> */}
-              </div>
-              {district.electionYear ? (
-                <div>
-                  <h2>Candidates Running for Election</h2>
-                  {/* <a
-                    target="__blank"
-                    noopenner="false"
-                    noreferrer="false"
-                    href={region.electionSite}
-                  >
-                    Election Site
-                  </a> */}
-                  <ul className="candidate-list">
-                    {district.candidates.map((candidate, index) => (
-                      <li className="candidate" key={index}>
-                        {/* <image className="candidate-image" src="" /> */}
-                        {candidate.website ? (
-                          <a
-                            className="candidate-link"
-                            href={candidate.website}
-                            noopenner="false"
-                            noreferrer="false"
-                            target="__blank"
-                          >
-                            {candidate.name}
-                          </a>
-                        ) : (
-                          <p style={{ margin: 0 }}>{candidate.name}</p>
-                        )}
-                      </li>
+                <h2>{district}</h2>
+                <>
+                  <h2>Elected Officials</h2>
+                  {districtLeaders.length > 0
+                    ? districtLeaders.map((elected, index) => (
+                        <Pill key={index} leader={elected} />
+                      ))
+                    : "No Elected"}
+                </>
+                {districtCandidates.length > 0 ? (
+                  <>
+                    <h2>Candidates</h2>
+                    {districtCandidates.map((candidate, index) => (
+                      <Pill key={index} leader={candidate} />
                     ))}
-                  </ul>
-                </div>
-              ) : (
-                "Not an election year"
-              )}
+                  </>
+                ) : (
+                  <div>
+                    <p>No Candidates</p>
+                  </div>
+                )}
+              </div>
             </>
           ) : (
             <p>None Selected</p>

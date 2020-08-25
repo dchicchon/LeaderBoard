@@ -1,0 +1,25 @@
+.pill {
+  margin: 0.5rem 0;
+}
+.leader-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  /* transform: scale(2); */
+}
+
+.leader-link {
+  margin-left: 0.75rem;
+  text-decoration: none;
+  font-weight: 400;
+  color: black;
+  font-size: 1rem;
+  transition: color 0.3s;
+  transform: translateY(50%);
+}
+
+.leader-link:hover {
+  color: dodgerblue;
+}
